@@ -7,10 +7,22 @@ function RoundBrilliantDiamond({ scrollProgress }: { scrollProgress: number }) {
   const meshRef = useRef<THREE.Mesh>(null);
 
   // Rotate based on scroll
-  useFrame(() => {
+  useFrame((_, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = scrollProgress * Math.PI * 2;
-      meshRef.current.rotation.x = Math.sin(scrollProgress * Math.PI) * 0.3;
+      const targetY = scrollProgress * Math.PI * 1.2;
+      const targetX = Math.sin(scrollProgress * Math.PI) * 0.15;
+      meshRef.current.rotation.y = THREE.MathUtils.damp(
+        meshRef.current.rotation.y,
+        targetY,
+        6,
+        delta
+      );
+      meshRef.current.rotation.x = THREE.MathUtils.damp(
+        meshRef.current.rotation.x,
+        targetX,
+        6,
+        delta
+      );
     }
   });
 
@@ -215,13 +227,14 @@ export default function Diamond3D({ scrollProgress }: Diamond3DProps) {
           {/* Interactive Orbit Controls - Free rotation, no zoom */}
           <OrbitControls
             ref={controlsRef}
+            enableRotate={true}
             enableZoom={false}
             enablePan={false}
             autoRotate={true}
-            autoRotateSpeed={1.5}
-            rotateSpeed={0.8}
+            autoRotateSpeed={0.8}
+            rotateSpeed={0.6}
             enableDamping={true}
-            dampingFactor={0.05}
+            dampingFactor={0.12}
             minPolarAngle={Math.PI / 4}
             maxPolarAngle={Math.PI * 3 / 4}
           />
