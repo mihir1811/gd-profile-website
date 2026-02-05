@@ -78,19 +78,23 @@ function RoundBrilliantDiamond({ scrollProgress }: { scrollProgress: number }) {
       <meshPhysicalMaterial
         color="#ffffff"
         metalness={0}
-        roughness={0}
+        roughness={0.005}
         transmission={1.0}
-        thickness={3.0}
+        thickness={2.2}
         ior={2.417}
         clearcoat={1.0}
-        clearcoatRoughness={0}
-        envMapIntensity={4}
+        clearcoatRoughness={0.002}
+        envMapIntensity={8}
+        attenuationColor={new THREE.Color('#f8fbff')}
+        attenuationDistance={1.6}
         transparent={true}
-        opacity={0.6}
-        dispersion={0.15}
+        opacity={1}
+        dispersion={0.2}
         flatShading={true}
         side={THREE.DoubleSide}
-        specularIntensity={2.5}
+        specularIntensity={3.0}
+        specularColor={new THREE.Color('#ffffff')}
+        reflectivity={1}
       />
     </mesh>
   );
