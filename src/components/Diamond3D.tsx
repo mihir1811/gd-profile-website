@@ -7,212 +7,193 @@ interface DiamondMeshProps {
   scrollProgress: number;
 }
 
-function PrincessCutDiamond({ scrollProgress }: DiamondMeshProps) {
+function RealisticDiamond({ scrollProgress }: DiamondMeshProps) {
   const meshRef = useRef<THREE.Mesh>(null);
 
-  // Create realistic princess-cut diamond geometry with proper facets
   const geometry = useMemo(() => {
     const geo = new THREE.BufferGeometry();
-    
     const vertices: number[] = [];
     const indices: number[] = [];
-    let vertexIndex = 0;
-    
+    let idx = 0;
+
     const addVertex = (x: number, y: number, z: number) => {
       vertices.push(x, y, z);
-      return vertexIndex++;
+      return idx++;
     };
+
+    const addFace = (a: number, b: number, c: number) => {
+      indices.push(a, b, c);
+    };
+
+    // ROUGH DIAMOND - Natural crystalline rock structure
+    // Creates an octahedral diamond crystal with jagged surfaces
     
-    // Princess cut dimensions
-    const tableSize = 0.65; // Table width (top flat surface)
-    const crownHeight = 0.25;
-    const girdleHeight = 0.0;
-    const pavilionDepth = -0.85;
-    const girdleSize = 1.0; // Full width at girdle
-    const crownAngle = 0.15; // Crown facet angle
+    // Main octahedral vertices
+    const top = addVertex(0, 0.6, 0);
+    const bottom = addVertex(0, -0.6, 0);
+    const front = addVertex(0.5, 0, 0.5);
+    const back = addVertex(-0.5, 0, -0.5);
+    const right = addVertex(0.5, 0, -0.5);
+    const left = addVertex(-0.5, 0, 0.5);
+
+    // Secondary crystalline vertices - jagged details
+    const t1 = addVertex(0.15, 0.35, 0.15);
+    const t2 = addVertex(-0.15, 0.35, 0.15);
+    const t3 = addVertex(-0.15, 0.35, -0.15);
+    const t4 = addVertex(0.15, 0.35, -0.15);
     
-    // ============ TABLE (top flat square) ============
-    const t1 = addVertex(-tableSize, crownHeight, -tableSize);
-    const t2 = addVertex(tableSize, crownHeight, -tableSize);
-    const t3 = addVertex(tableSize, crownHeight, tableSize);
-    const t4 = addVertex(-tableSize, crownHeight, tableSize);
+    const b1 = addVertex(0.15, -0.35, 0.15);
+    const b2 = addVertex(-0.15, -0.35, 0.15);
+    const b3 = addVertex(-0.15, -0.35, -0.15);
+    const b4 = addVertex(0.15, -0.35, -0.15);
+
+    // Tertiary crystalline vertices - more roughness
+    const m1 = addVertex(0.35, 0.1, 0.35);
+    const m2 = addVertex(-0.35, 0.1, 0.35);
+    const m3 = addVertex(-0.35, 0.1, -0.35);
+    const m4 = addVertex(0.35, 0.1, -0.35);
     
-    // Table faces (2 triangles)
-    indices.push(t1, t2, t3);
-    indices.push(t1, t3, t4);
+    const m5 = addVertex(0.4, -0.05, 0.3);
+    const m6 = addVertex(-0.4, -0.05, 0.3);
+    const m7 = addVertex(-0.4, -0.05, -0.3);
+    const m8 = addVertex(0.4, -0.05, -0.3);
+
+    // Irregular edge vertices for roughness
+    const e1 = addVertex(0.28, 0.22, 0.42);
+    const e2 = addVertex(0.18, -0.15, 0.48);
+    const e3 = addVertex(-0.25, 0.25, 0.45);
+    const e4 = addVertex(-0.3, -0.2, 0.4);
     
-    // ============ CROWN FACETS ============
-    // Star facets (chevrons from table corners to girdle corners)
-    const starMid = crownHeight * 0.4;
-    const starSize = (tableSize + girdleSize) / 2;
-    
-    // Corner star vertices
-    const s1 = addVertex(-starSize, starMid, -starSize);
-    const s2 = addVertex(starSize, starMid, -starSize);
-    const s3 = addVertex(starSize, starMid, starSize);
-    const s4 = addVertex(-starSize, starMid, starSize);
-    
-    // Edge midpoints for bezel facets
-    const bezelHeight = crownHeight * 0.5;
-    const bezelSize = (tableSize + girdleSize) / 2 + 0.05;
-    
-    const b1 = addVertex(0, bezelHeight, -bezelSize); // top edge
-    const b2 = addVertex(bezelSize, bezelHeight, 0);  // right edge
-    const b3 = addVertex(0, bezelHeight, bezelSize);  // bottom edge
-    const b4 = addVertex(-bezelSize, bezelHeight, 0); // left edge
-    
-    // Girdle corners
-    const g1 = addVertex(-girdleSize, girdleHeight, -girdleSize);
-    const g2 = addVertex(girdleSize, girdleHeight, -girdleSize);
-    const g3 = addVertex(girdleSize, girdleHeight, girdleSize);
-    const g4 = addVertex(-girdleSize, girdleHeight, girdleSize);
-    
-    // Girdle edge midpoints
-    const gm1 = addVertex(0, girdleHeight, -girdleSize);
-    const gm2 = addVertex(girdleSize, girdleHeight, 0);
-    const gm3 = addVertex(0, girdleHeight, girdleSize);
-    const gm4 = addVertex(-girdleSize, girdleHeight, 0);
-    
-    // Crown facets - connecting table to girdle
-    // Top side (between t1-t2 and g1-gm1-g2)
-    indices.push(t1, b1, t2);
-    indices.push(t1, s1, b1);
-    indices.push(t2, b1, s2);
-    indices.push(s1, g1, gm1);
-    indices.push(s1, gm1, b1);
-    indices.push(b1, gm1, s2);
-    indices.push(s2, gm1, g2);
-    
-    // Right side (between t2-t3 and g2-gm2-g3)
-    indices.push(t2, b2, t3);
-    indices.push(t2, s2, b2);
-    indices.push(t3, b2, s3);
-    indices.push(s2, g2, gm2);
-    indices.push(s2, gm2, b2);
-    indices.push(b2, gm2, s3);
-    indices.push(s3, gm2, g3);
-    
-    // Bottom side (between t3-t4 and g3-gm3-g4)
-    indices.push(t3, b3, t4);
-    indices.push(t3, s3, b3);
-    indices.push(t4, b3, s4);
-    indices.push(s3, g3, gm3);
-    indices.push(s3, gm3, b3);
-    indices.push(b3, gm3, s4);
-    indices.push(s4, gm3, g4);
-    
-    // Left side (between t4-t1 and g4-gm4-g1)
-    indices.push(t4, b4, t1);
-    indices.push(t4, s4, b4);
-    indices.push(t1, b4, s1);
-    indices.push(s4, g4, gm4);
-    indices.push(s4, gm4, b4);
-    indices.push(b4, gm4, s1);
-    indices.push(s1, gm4, g1);
-    
-    // ============ PAVILION FACETS ============
-    // Culet (bottom point)
-    const culet = addVertex(0, pavilionDepth, 0);
-    
-    // Pavilion main facets - V-shaped chevrons
-    const pavHeight = pavilionDepth * 0.45;
-    const pavSize = girdleSize * 0.5;
-    
-    // Pavilion break facet vertices
-    const pb1 = addVertex(0, pavHeight, -pavSize);
-    const pb2 = addVertex(pavSize, pavHeight, 0);
-    const pb3 = addVertex(0, pavHeight, pavSize);
-    const pb4 = addVertex(-pavSize, pavHeight, 0);
-    
-    // Corner pavilion vertices
-    const pc1 = addVertex(-pavSize * 0.7, pavHeight * 0.8, -pavSize * 0.7);
-    const pc2 = addVertex(pavSize * 0.7, pavHeight * 0.8, -pavSize * 0.7);
-    const pc3 = addVertex(pavSize * 0.7, pavHeight * 0.8, pavSize * 0.7);
-    const pc4 = addVertex(-pavSize * 0.7, pavHeight * 0.8, pavSize * 0.7);
-    
-    // Pavilion facets - top section (girdle to break)
-    // Top edge
-    indices.push(g1, pb1, gm1);
-    indices.push(gm1, pb1, g2);
-    indices.push(g1, pc1, pb1);
-    indices.push(pb1, pc2, g2);
-    
-    // Right edge
-    indices.push(g2, pb2, gm2);
-    indices.push(gm2, pb2, g3);
-    indices.push(g2, pc2, pb2);
-    indices.push(pb2, pc3, g3);
-    
-    // Bottom edge
-    indices.push(g3, pb3, gm3);
-    indices.push(gm3, pb3, g4);
-    indices.push(g3, pc3, pb3);
-    indices.push(pb3, pc4, g4);
-    
-    // Left edge
-    indices.push(g4, pb4, gm4);
-    indices.push(gm4, pb4, g1);
-    indices.push(g4, pc4, pb4);
-    indices.push(pb4, pc1, g1);
-    
-    // Pavilion facets - bottom section (break to culet)
-    indices.push(pb1, culet, pb2);
-    indices.push(pb2, culet, pb3);
-    indices.push(pb3, culet, pb4);
-    indices.push(pb4, culet, pb1);
-    
-    // Corner pavilion facets to culet
-    indices.push(pc1, pb1, culet);
-    indices.push(pc1, culet, pb4);
-    indices.push(pc2, pb2, culet);
-    indices.push(pc2, culet, pb1);
-    indices.push(pc3, pb3, culet);
-    indices.push(pc3, culet, pb2);
-    indices.push(pc4, pb4, culet);
-    indices.push(pc4, culet, pb3);
-    
+    const e5 = addVertex(0.32, 0.18, -0.38);
+    const e6 = addVertex(0.2, -0.22, -0.45);
+    const e7 = addVertex(-0.28, 0.2, -0.4);
+    const e8 = addVertex(-0.32, -0.18, -0.42);
+
+    // TOP PYRAMID - main triangular faces
+    addFace(top, t1, t2);
+    addFace(top, t2, t3);
+    addFace(top, t3, t4);
+    addFace(top, t4, t1);
+
+    // Connect top secondary vertices
+    addFace(t1, e1, m1);
+    addFace(t2, m2, e3);
+    addFace(t3, e7, m3);
+    addFace(t4, m4, e5);
+
+    // Top to middle transitions
+    addFace(t1, m1, front);
+    addFace(t2, left, m2);
+    addFace(t3, back, m3);
+    addFace(t4, right, m4);
+
+    // UPPER MIDDLE BAND - irregular crystalline facets
+    addFace(m1, e1, m5);
+    addFace(m1, m5, m4);
+    addFace(m2, m6, e3);
+    addFace(m2, e3, m3);
+    addFace(m3, m7, e7);
+    addFace(m3, e7, m4);
+    addFace(m4, e5, m8);
+    addFace(m4, m8, m1);
+
+    // SIDE FACES - octahedral planes with roughness
+    addFace(front, e1, e2);
+    addFace(front, e2, m5);
+    addFace(front, m5, m1);
+    addFace(front, m1, e1);
+
+    addFace(left, e3, e4);
+    addFace(left, e4, m6);
+    addFace(left, m6, m2);
+    addFace(left, m2, e3);
+
+    addFace(back, e7, e8);
+    addFace(back, e8, m7);
+    addFace(back, m7, m3);
+    addFace(back, m3, e7);
+
+    addFace(right, e5, e6);
+    addFace(right, e6, m8);
+    addFace(right, m8, m4);
+    addFace(right, m4, e5);
+
+    // LOWER MIDDLE BAND - rough crystalline
+    addFace(b1, m5, e2);
+    addFace(b1, e2, b2);
+    addFace(b2, e4, m6);
+    addFace(b2, m6, b1);
+
+    addFace(b3, m7, e8);
+    addFace(b3, e8, b4);
+    addFace(b4, e6, m8);
+    addFace(b4, m8, b3);
+
+    // BOTTOM PYRAMID - main triangular faces
+    addFace(bottom, b1, b2);
+    addFace(bottom, b2, b3);
+    addFace(bottom, b3, b4);
+    addFace(bottom, b4, b1);
+
+    // Connect bottom secondary to primary
+    addFace(b1, front, e2);
+    addFace(b2, left, e4);
+    addFace(b3, back, e8);
+    addFace(b4, right, e6);
+
+    // Additional rough crystalline faces for more detail
+    addFace(e1, e2, m5);
+    addFace(e3, e4, m6);
+    addFace(e7, e8, m7);
+    addFace(e5, e6, m8);
+
+    // Extra small facets for crystalline structure
+    addFace(t1, front, e1);
+    addFace(t2, left, e3);
+    addFace(t3, back, e7);
+    addFace(t4, right, e5);
+
     geo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
     geo.setIndex(indices);
     geo.computeVertexNormals();
-    
+
     return geo;
   }, []);
 
   useFrame((state) => {
     if (meshRef.current) {
-      // Smooth rotation based on scroll
-      meshRef.current.rotation.y = scrollProgress * Math.PI * 4;
-      meshRef.current.rotation.x = Math.sin(scrollProgress * Math.PI) * 0.2;
-      
-      // Subtle floating animation
-      meshRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
+      meshRef.current.rotation.y = scrollProgress * Math.PI * 4 + state.clock.elapsedTime * 0.2;
+      meshRef.current.rotation.x = Math.sin(scrollProgress * Math.PI) * 0.45 + Math.sin(state.clock.elapsedTime * 0.5) * 0.18;
+      meshRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.35) * 0.12;
+      meshRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.22;
     }
   });
 
   return (
-    <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
-      <mesh ref={meshRef} geometry={geometry} scale={1.8}>
+    <Float speed={1.2} rotationIntensity={0.07} floatIntensity={0.23}>
+      <mesh ref={meshRef} geometry={geometry} scale={1.5}>
         <MeshTransmissionMaterial
           backside
-          backsideThickness={0.3}
-          samples={32}
-          resolution={1024}
-          transmission={0.98}
-          roughness={0.0}
-          thickness={0.8}
-          ior={2.417} // Diamond's real IOR
-          chromaticAberration={0.15}
-          anisotropy={0.3}
-          distortion={0.1}
-          distortionScale={0.2}
-          temporalDistortion={0.1}
-          clearcoat={1}
-          clearcoatRoughness={0}
-          attenuationDistance={0.3}
-          attenuationColor="#ffffff"
-          color="#fcfcfc"
-          reflectivity={1}
-          envMapIntensity={3}
+          backsideThickness={1.2}
+          samples={280}
+          resolution={2048}
+          transmission={0.92}
+          roughness={0.08}
+          thickness={2.5}
+          ior={2.417}
+          chromaticAberration={0.42}
+          anisotropy={0.85}
+          distortion={0.4}
+          distortionScale={0.6}
+          temporalDistortion={0.4}
+          clearcoat={0.8}
+          clearcoatRoughness={0.1}
+          attenuationDistance={1.5}
+          attenuationColor="#e8e8e8"
+          color="#f5f5f0"
+          reflectivity={0.95}
+          envMapIntensity={5.8}
+          side={THREE.DoubleSide}
         />
       </mesh>
     </Float>
@@ -227,40 +208,86 @@ export default function Diamond3D({ scrollProgress }: Diamond3DProps) {
   return (
     <div className="w-full h-full">
       <Canvas
-        camera={{ position: [0, 0.5, 5], fov: 50 }}
+        camera={{ position: [0, 0.12, 6.0], fov: 40 }}
         gl={{ 
           antialias: true, 
           alpha: true,
           powerPreference: "high-performance",
-          stencil: false,
+          precision: "highp",
         }}
         dpr={[1, 2]}
         style={{ background: 'transparent' }}
       >
         <Suspense fallback={null}>
-          {/* Multi-point lighting for maximum sparkle */}
-          <ambientLight intensity={0.3} />
-          <directionalLight position={[5, 10, 5]} intensity={2} color="#ffffff" />
-          <directionalLight position={[-5, 10, -5]} intensity={1.5} color="#fff5e6" />
-          <directionalLight position={[0, -5, 0]} intensity={0.5} color="#e6f0ff" />
+          {/* Professional jewelry store lighting for realistic diamond */}
+          <ambientLight intensity={0.1} />
           
-          {/* Accent lights for fire effect */}
-          <pointLight position={[3, 3, 3]} intensity={1.5} color="#ffe4c4" />
-          <pointLight position={[-3, 2, -3]} intensity={1} color="#e6e6ff" />
-          <pointLight position={[0, 5, 0]} intensity={2} color="#ffffff" />
-          <spotLight 
-            position={[0, 8, 0]} 
-            angle={0.5} 
-            penumbra={0.5} 
-            intensity={3} 
-            color="#fff8f0"
-            castShadow={false}
+          {/* Main directional key light */}
+          <directionalLight 
+            position={[8, 12, 8]} 
+            intensity={3.8} 
+            color="#ffffff"
           />
           
-          <PrincessCutDiamond scrollProgress={scrollProgress} />
+          {/* Fill light - warm tone */}
+          <directionalLight 
+            position={[-9, 9, -9]} 
+            intensity={3.0} 
+            color="#fff5f0"
+          />
           
-          {/* High quality environment for realistic reflections */}
-          <Environment preset="studio" environmentIntensity={1.5} />
+          {/* Back light */}
+          <directionalLight 
+            position={[0, -9, 0]} 
+            intensity={2.4} 
+            color="#e8f0ff"
+          />
+          
+          {/* Crown side lights - top illumination */}
+          <pointLight position={[10, 8, 0]} intensity={3.8} color="#ffffff" distance={65} />
+          <pointLight position={[-10, 8, 0]} intensity={3.2} color="#ffe6d0" distance={60} />
+          <pointLight position={[0, 8, 10]} intensity={4.2} color="#fff8f2" distance={68} />
+          <pointLight position={[0, 8, -10]} intensity={3.4} color="#fff0e8" distance={62} />
+          
+          {/* Mid-crown accent lights */}
+          <pointLight position={[7, 5, 7]} intensity={2.8} color="#ffe8d8" decay={1.08} />
+          <pointLight position={[-7, 5, -7]} intensity={2.6} color="#e2ecff" decay={1.08} />
+          <pointLight position={[7, 4, -7]} intensity={2.7} color="#fff2e8" decay={1.08} />
+          <pointLight position={[-7, 5, 7]} intensity={2.5} color="#e6f0ff" decay={1.08} />
+          
+          {/* Pavilion bottom lights */}
+          <pointLight position={[12, 4, 0]} intensity={3.2} color="#ffffff" distance={52} />
+          <pointLight position={[-12, 4, 0]} intensity={3.2} color="#fff0e6" distance={52} />
+          <pointLight position={[0, 4, 12]} intensity={3.3} color="#ffffff" distance={54} />
+          <pointLight position={[0, 4, -12]} intensity={3.0} color="#ffe8d8" distance={50} />
+          
+          {/* Deep pavilion accents */}
+          <pointLight position={[5, 1, -5]} intensity={1.9} color="#f0e8ff" decay={1.18} />
+          <pointLight position={[-5, 0, 5]} intensity={1.8} color="#fff0c8" decay={1.18} />
+          
+          {/* Top spotlight - maximum brilliance */}
+          <spotLight 
+            position={[0, 14, 0]} 
+            angle={0.95} 
+            penumbra={0.9} 
+            intensity={5.2} 
+            color="#ffffff"
+          />
+          
+          {/* Bottom spotlight - pavilion depth */}
+          <spotLight 
+            position={[0, -6, 6]} 
+            angle={0.8} 
+            penumbra={0.8} 
+            intensity={3.6} 
+            color="#f0f8ff"
+          />
+          
+          {/* Realistic round brilliant diamond */}
+          <RealisticDiamond scrollProgress={scrollProgress} />
+          
+          {/* High-quality studio environment */}
+          <Environment preset="studio" environmentIntensity={3.4} blur={0.01} />
         </Suspense>
       </Canvas>
     </div>
