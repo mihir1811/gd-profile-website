@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-12 sm:mb-16">
           <div className="sm:col-span-2">
             <a href="#" className="text-2xl sm:text-3xl font-serif font-semibold tracking-wider text-gradient-gold mb-3 sm:mb-4 inline-block">
-              LUMIÈRE
+              GEMSTONEDIMONDS
             </a>
             <p className="text-muted-foreground text-sm sm:text-base max-w-md leading-relaxed">
               For over a century, we have crafted the world's most exceptional diamonds,

@@ -5,6 +5,7 @@ import StorySection from '@/components/StorySection';
 import ProcessSection from '@/components/ProcessSection';
 import CollectionSection from '@/components/CollectionSection';
 import ContactSection from '@/components/ContactSection';
+import WhyGemstoneDiamondsSection from '@/components/WhyGemstoneDiamondsSection';
 import Footer from '@/components/Footer';
 import Diamond3D from '@/components/Diamond3D';
 
@@ -46,6 +47,7 @@ const Index = () => {
         <ProcessSection />
         <CollectionSection />
         <ContactSection />
+        <WhyGemstoneDiamondsSection />
         <Footer />
       </div>
     </div>
