@@ -72,6 +72,11 @@ export default {
         serif: ['Cormorant Garamond', 'Georgia', 'serif'],
         sans: ['Montserrat', 'sans-serif'],
       },
+      spacing: {
+        14: '3.5rem',
+        40: '10rem',
+        44: '11rem',
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
