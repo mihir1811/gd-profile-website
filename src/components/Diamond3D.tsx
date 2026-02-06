@@ -9,18 +9,18 @@ function RoundBrilliantDiamond({ scrollProgress }: { scrollProgress: number }) {
   // Rotate based on scroll
   useFrame((_, delta) => {
     if (meshRef.current) {
-      const targetY = scrollProgress * Math.PI * 1.2;
-      const targetX = Math.sin(scrollProgress * Math.PI) * 0.15;
+      const targetY = scrollProgress * Math.PI * 0.8;
+      const targetX = Math.sin(scrollProgress * Math.PI) * 0.1;
       meshRef.current.rotation.y = THREE.MathUtils.damp(
         meshRef.current.rotation.y,
         targetY,
-        6,
+        4,
         delta
       );
       meshRef.current.rotation.x = THREE.MathUtils.damp(
         meshRef.current.rotation.x,
         targetX,
-        6,
+        4,
         delta
       );
     }

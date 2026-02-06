@@ -26,21 +26,21 @@ export default function StorySection() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
-            <p className="text-xs sm:text-sm tracking-[0.3em] text-primary mb-3 sm:mb-4">OUR HERITAGE</p>
+            <p className="text-xs sm:text-sm tracking-[0.3em] text-primary mb-3 sm:mb-4">MY EXPERTISE</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-light mb-6 sm:mb-8 leading-tight">
-              A Legacy of
+              Professional Journey in
               <br />
-              <span className="italic text-gradient-gold">Unparalleled Excellence</span>
+              <span className="italic text-gradient-gold">Diamond Excellence</span>
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
-              For over a century, Lumière has been at the forefront of diamond excellence.
-              From the remote mines of Botswana to our master ateliers in Antwerp,
-              every stone tells a story of passion, precision, and perfection.
+              With over a decade of experience in the diamond industry, I specialize in
+              sourcing exceptional stones and creating bespoke pieces. From natural diamonds
+              to lab-grown alternatives, I offer expert guidance on every aspect of your purchase.
             </p>
             <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
-              Our commitment to ethical sourcing and sustainable practices ensures that
-              each diamond not only sparkles with brilliance but also carries the promise
-              of a better world.
+              My commitment to quality, transparency, and personalized service ensures that
+              each client receives not just a product, but a trusted partnership in their
+              diamond journey.
             </p>
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
               <div>

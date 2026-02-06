@@ -26,16 +26,16 @@ export default function ContactSection() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
-            <p className="text-xs sm:text-sm tracking-[0.3em] text-primary mb-3 sm:mb-4">PRIVATE CONSULTATION</p>
+              <p className="text-xs sm:text-sm tracking-[0.3em] text-primary mb-3 sm:mb-4">GET IN TOUCH</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-light mb-4 sm:mb-6 leading-tight">
-              Begin Your
+              Let's Discuss
               <br />
-              <span className="italic text-gradient-gold">Journey</span>
+              <span className="italic text-gradient-gold">Your Vision</span>
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8">
-              Experience the Lumière difference with a personalized consultation.
-              Our experts are ready to guide you through our exquisite collections
-              and create something truly unique.
+              With years of expertise in diamond sourcing and custom design,
+              I'm here to guide you through my offerings and help you find
+              exactly what you're looking for.
             </p>
 
             <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">

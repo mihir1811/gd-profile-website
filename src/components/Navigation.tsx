@@ -29,8 +29,8 @@ export default function Navigation() {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        <a href="#" className="text-lg sm:text-2xl font-serif font-semibold tracking-wider text-gradient-gold flex-shrink-0">
-          LUMIÈRE
+        <a href="#" className="flex-shrink-0">
+          <img src="/logo.png" alt="Lumière" className="h-8 sm:h-10" />
         </a>
         
         {/* Desktop Navigation */}

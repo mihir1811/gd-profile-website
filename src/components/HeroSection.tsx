@@ -32,13 +32,13 @@ export default function HeroSection({ scrollProgress }: HeroSectionProps) {
             href="#story"
             className="w-full sm:w-auto border-gradient-gold px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm tracking-widest text-foreground hover:bg-primary/10 transition-all duration-300 pointer-events-auto text-center"
           >
-            EXPLORE
+            EXPLORE MY WORK
           </a>
           <a
             href="#collection"
             className="w-full sm:w-auto bg-primary text-primary-foreground px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm tracking-widest hover:bg-primary/90 transition-all duration-300 pointer-events-auto text-center"
           >
-            VIEW COLLECTION
+            VIEW OFFERINGS
           </a>
         </div>
       </div>

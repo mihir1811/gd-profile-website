@@ -2,19 +2,62 @@ import { useEffect, useRef, useState } from 'react';
 
 const collections = [
   {
-    name: 'Éternité',
-    category: 'Engagement Rings',
-    description: 'Timeless designs that capture forever',
+    name: 'Natural Diamond',
+    category: 'Natural Collection',
+    description: 'Earth-grown brilliance with timeless appeal',
+    icon: (
+      <svg className="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 2 2 8l10 14L22 8 12 2z" />
+        <path d="M2 8h20" />
+        <path d="M9 8l3 14 3-14" />
+      </svg>
+    ),
   },
   {
-    name: 'Lumière Noir',
+    name: 'Lab Grown Diamond',
+    category: 'Lab Collection',
+    description: 'Sustainable sparkle with modern perfection',
+    icon: (
+      <svg className="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M10 2h4" />
+        <path d="M12 2v5" />
+        <path d="M8 7h8" />
+        <path d="M7 7l3 13h4l3-13" />
+        <path d="M9 13h6" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Gold',
+    category: 'Gold Collection',
+    description: 'Warm radiance in refined gold settings',
+    icon: (
+      <svg className="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="8" />
+        <path d="M8 12h8" />
+        <path d="M12 8v8" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Black Diamond',
     category: 'Black Diamond Series',
-    description: 'Bold statements in rare black diamonds',
+    description: 'Bold statements with rare depth and contrast',
+    icon: (
+      <svg className="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2 2 8l10 14L22 8 12 2z" />
+      </svg>
+    ),
   },
   {
-    name: 'Héritage',
-    category: 'Vintage Collection',
-    description: 'Classic elegance reimagined',
+    name: 'Fancy Cut Diamonds',
+    category: 'Fancy Cuts',
+    description: 'Unique shapes crafted for standout brilliance',
+    icon: (
+      <svg className="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 3l3.5 5 6 .9-4.3 4.2 1 6-5.2-2.8L7 19.1l1-6L3.7 8.9l6-.9L12 3z" />
+      </svg>
+    ),
   },
 ];
 
@@ -45,16 +88,16 @@ export default function CollectionSection() {
         <div className={`mb-12 sm:mb-16 md:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 sm:gap-6">
             <div>
-              <p className="text-xs sm:text-sm tracking-[0.3em] text-primary mb-3 sm:mb-4">COLLECTIONS</p>
+              <p className="text-xs sm:text-sm tracking-[0.3em] text-primary mb-3 sm:mb-4">WHAT I OFFER</p>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-light">
-                Curated <span className="italic text-gradient-gold">Brilliance</span>
+                Expert <span className="italic text-gradient-gold">Specializations</span>
               </h2>
             </div>
             <a
-              href="#"
+              href="#contact"
               className="border-gradient-gold px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm tracking-widest text-foreground hover:bg-primary/10 transition-all duration-300 self-start md:self-auto"
             >
-              VIEW ALL COLLECTIONS
+              SCHEDULE CONSULTATION
             </a>
           </div>
         </div>
@@ -71,10 +114,8 @@ export default function CollectionSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
               
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 border border-primary/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                  <svg className="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 text-primary/50" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                  </svg>
+                <div className="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 border border-primary/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 text-primary/70">
+                  {collection.icon}
                 </div>
               </div>
 
