@@ -130,7 +130,7 @@ export default function About() {
           </div>
         </section>
 
-        <section className="py-12 sm:py-16 md:py-20 bg-background">
+        <section className="py-12 sm:py-16 md:py-20 bg-transparent">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="grid gap-8 lg:gap-10 lg:grid-cols-[1.1fr_1fr] items-start">
               <div>
@@ -199,7 +199,7 @@ export default function About() {
           </div>
         </section>
 
-        <section className="py-16 sm:py-20 md:py-24 bg-background">
+        <section className="py-16 sm:py-20 md:py-24 bg-transparent">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="rounded-2xl border border-primary/30 bg-background/40 p-6 py-10 sm:px-10 sm:py-12 md:px-12 md:py-14">
               <div className="grid gap-8 lg:gap-10 lg:grid-cols-2 items-center">

@@ -35,10 +35,13 @@ export default function Navigation() {
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6 lg:gap-8">
-          <a href="/#story" className="text-xs lg:text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors">
-            OUR STORY
+          <a href="/diamond" className="text-xs lg:text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors">
+            DIAMONDS
           </a>
-          <a href="/#process" className="text-xs lg:text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors">
+          <a href="/jewelry" className="text-xs lg:text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors">
+            JEWELRY
+          </a>
+          <a href="/craft" className="text-xs lg:text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors">
             THE CRAFT
           </a>
           <a href="/#collection" className="text-xs lg:text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors">
@@ -71,14 +74,21 @@ export default function Navigation() {
         <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="container mx-auto px-4 py-4 space-y-4 flex flex-col">
             <a
-              href="/#story"
+              href="/diamond"
               className="text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              OUR STORY
+              DIAMONDS
             </a>
             <a
-              href="/#process"
+              href="/jewelry"
+              className="text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              JEWELRY
+            </a>
+            <a
+              href="/craft"
               className="text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
