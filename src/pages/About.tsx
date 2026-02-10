@@ -214,7 +214,7 @@ export default function About() {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 sm:justify-end">
                   <a
-                    href="/#contact"
+                    href="/contact"
                     className="border-gradient-gold px-6 py-3 text-xs sm:text-sm tracking-widest text-foreground hover:bg-primary/10 transition-colors text-center"
                   >
                     START A PROJECT

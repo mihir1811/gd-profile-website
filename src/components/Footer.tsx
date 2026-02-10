@@ -26,7 +26,7 @@ export default function Footer() {
           <div>
             <h4 className="text-xs sm:text-sm tracking-widest mb-4 sm:mb-6">CONNECT</h4>
             <ul className="space-y-2 sm:space-y-3">
-              <li><a href="#contact" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">Book Appointment</a></li>
+              <li><a href="/contact" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">Book Appointment</a></li>
               <li><a href="#" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">Find a Boutique</a></li>
               <li><a href="#" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">Press & Media</a></li>
               <li><a href="#" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">Careers</a></li>

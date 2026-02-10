@@ -29,7 +29,7 @@ export default function Navigation() {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        <a href="#" className="flex-shrink-0">
+        <a href="/" className="flex-shrink-0">
           <img src="/logo.png" alt="Lumière" className="h-8 sm:h-10" />
         </a>
         
@@ -47,7 +47,7 @@ export default function Navigation() {
           <a href="/#collection" className="text-xs lg:text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors">
             COLLECTION
           </a>
-          <a href="/#contact" className="text-xs lg:text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors">
+          <a href="/contact" className="text-xs lg:text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors">
             CONTACT
           </a>
           <a href="/about" className="text-xs lg:text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors">
@@ -56,9 +56,12 @@ export default function Navigation() {
         </div>
 
         {/* Desktop CTA Button */}
-        <button className="hidden md:block border-gradient-gold px-4 lg:px-6 py-2 text-xs lg:text-sm tracking-widest text-foreground hover:bg-primary/10 transition-colors flex-shrink-0">
+        <a
+          href="/contact"
+          className="hidden md:block border-gradient-gold px-4 lg:px-6 py-2 text-xs lg:text-sm tracking-widest text-foreground hover:bg-primary/10 transition-colors flex-shrink-0"
+        >
           INQUIRE
-        </button>
+        </a>
 
         {/* Mobile Menu Button */}
         <button
@@ -102,7 +105,7 @@ export default function Navigation() {
               COLLECTION
             </a>
             <a
-              href="/#contact"
+              href="/contact"
               className="text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -115,9 +118,13 @@ export default function Navigation() {
             >
               ABOUT
             </a>
-            <button className="border-gradient-gold px-6 py-2 text-sm tracking-widest text-foreground hover:bg-primary/10 transition-colors w-full">
+            <a
+              href="/contact"
+              className="border-gradient-gold px-6 py-2 text-sm tracking-widest text-foreground hover:bg-primary/10 transition-colors w-full text-center"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               INQUIRE
-            </button>
+            </a>
           </div>
         </div>
       )}

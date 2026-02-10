@@ -94,7 +94,7 @@ export default function CollectionSection() {
               </h2>
             </div>
             <a
-              href="#contact"
+              href="/contact"
               className="border-gradient-gold px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm tracking-widest text-foreground hover:bg-primary/10 transition-all duration-300 self-start md:self-auto"
             >
               SCHEDULE CONSULTATION
